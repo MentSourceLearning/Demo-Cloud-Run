@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: #0f172a;
+    color: #f8fafc;
+  }
+  
+  main {
+    max-width: 40rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  textarea {
+    width: 100%;
+    min-height: 6rem;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+  }
+  
+  button {
+    margin-top: 0.75rem;
+    font-size: 1.1rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  label {
+    display: block;
+    margin: 1rem 0 0.25rem;
+    color: #94a3b8;
+  }
+  
+  #question {
+    font-size: 1.35rem;
+    line-height: 1.4;
+    margin-top: 0;
+  }
+
+  #answer {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    min-height: 6rem;
+  }
+
+  #result {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    min-height: 2rem;
+  }
+
+  #result.correct {
+    color: #bbf7d0;
+  }
+
+  #result.wrong {
+    color: #fecaca;
+  }

@@ -1,0 +1,54 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: concepts-459009
+  REGION: us-central1
+  SERVICE: explainit1
+  IMAGE: us-central1-docker.pkg.dev/concepts-459009/explainit1/explainit1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/892803193821/locations/global/workloadIdentityPools/github-pool/providers/github-provider-cloud-run-demo
+          service_account: argo-deployer@concepts-459009.iam.gserviceaccount.com
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Log in to Artifact Registry
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Build and push the image
+        run: |
+          docker build -t "$IMAGE:${{ github.sha }}" .
+          docker push "$IMAGE:${{ github.sha }}"
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy "$SERVICE" \
+            --image "$IMAGE:${{ github.sha }}" \
+            --region "$REGION" \
+            --project "$PROJECT_ID" \
+            --port 8080 \
+            --min-instances 0 \
+            --max-instances 3 \
+            --cpu-boost \
+            --execution-environment gen2 \
+            --allow-unauthenticated \
+            --quiet

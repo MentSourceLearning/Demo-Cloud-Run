@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Explain It</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Explain It</h1>
+      <p>A right answer brings the next question. A wrong answer shows the right one for a few seconds, then the next question.</p>
+      <label id="question-label">Question</label>
+      <p id="question">What happens when Cloud Run scales to zero?</p>
+      <label for="answer">Your answer</label>
+      <textarea id="answer" placeholder="Type your answer"></textarea>
+      <button id="submit" type="button">Submit</button>
+      <p id="result" aria-live="polite"></p>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
+      
