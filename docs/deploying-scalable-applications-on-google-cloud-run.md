@@ -683,6 +683,18 @@ Cloud Run is a practical way to take a container from a laptop to an HTTPS servi
 
 Explain It is one AI-shaped service on that path. The page stays simple. The model stays behind `/api/submit`. The response tells you which instance answered, how long the model took, and how long that instance has been alive. Those are enough to see a cold start, a warm instance, and a second instance when you ask for one.
 
+### Cloud Run or GKE: which is the best?
+
+A participant asked, “Google Cloud Run and GKE, which is the best?”
+
+There is no single winner. Each one is the best choice for a different job.
+
+**Cloud Run is the best fit for a stateless request/response service** like Explain It. You bring a container. Google Cloud provides the HTTPS URL, starts and stops instances, and can scale the service to zero. You set region, memory, concurrency, identity, and a max instance count. You do not run a cluster, upgrade nodes, or write Kubernetes manifests. That is the right trade when the application is an API, a web service, or an AI endpoint with uneven traffic, and the team wants to spend its time on the product.
+
+**Google Kubernetes Engine (GKE) is the best fit when the thing you need is Kubernetes.** Choose GKE when the workload depends on the Kubernetes API: many services scheduled together, StatefulSets, DaemonSets, custom controllers, a service mesh, network policy you operate yourself, or node pools you tune for GPUs and special hardware. GKE manages the control plane. Your team still owns manifests, node pools, upgrades, and cluster cost, including capacity that stays up when traffic does not.
+
+Use the application as the test. If it is an HTTP container with a clear start command and a port, start on Cloud Run. Move to GKE when a real requirement shows up that Cloud Run cannot express. Starting on GKE “in case we need it later” means operating a cluster before the product needs one.
+
 The point of scaling is not only to survive more traffic. A service that grows should stay understandable, observable, secure, and cost-conscious. Cloud Run will start the instances. The limits, the identity, and the logs are still yours.
 
 ## References / Further Reading
@@ -703,4 +715,4 @@ The point of scaling is not only to survive more traffic. A service that grows s
 
 ## Author Bio
 
-Peculiar C. Umeh is a software developer, technical project manager, and open source advocate. She also works as a program and community manager. While managing a cloud project at JKA Consulting, whose team delivers DevOps as a service, she used an AnitaB.org Pluralsight package to study the Google Cloud leader material and Google Cloud Run. This guide is the practical version of her AnitaB.org Membership session, Deploying Scalable Applications on Google Cloud Run.
+Peculiar C. Umeh is a software developer, technical project manager, and open source advocate. She also works as a program and community manager. While managing a cloud project at JKA Consulting, whose team delivers DevOps as a service, she used an AnitaB.org Pluralsight package to study the Google Cloud leader material and Google Cloud Run. This guide was born from her AnitaB.org Membership session, Deploying Scalable Applications on Google Cloud Run, held on 8 October 2026. The session is listed on the [AnitaB.org event page](https://membership-app.anitab.org/flow/anitab/membership/eventcatalog/page/eventcatalogunauth/session/1787344688746001mXUa?utm_source=MarketingCloud&utm_medium=email&utm_campaign=9.28.26%2BMembership-Deploying%2BScalable%2BApps%2BEvent%2BEmail&utm_content=Deploying%2BScalable%2BApplications%2Bon%2BGoogle%2BCloud%2BRun&utm_term=+1267).
