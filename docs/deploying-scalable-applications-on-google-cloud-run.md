@@ -211,6 +211,12 @@ npm start
 
 Open `http://localhost:8080`. The first question is “What happens when Cloud Run scales to zero?” Submit an answer. A correct one is replaced by another question. An incorrect one shows a short correction, waits five seconds, and then moves on.
 
+This is the finished page. The same layout is what a reader sees on the Cloud Run URL after deploy.
+
+![Explain It, the quiz page. The heading is Explain It, and the first question is “What happens when Cloud Run scales to zero?”](images/explain-it.png)
+
+*Figure 1. Explain It, the quiz served by the Demo-Cloud-Run service.*
+
 ### 2. Package the service
 
 The image is built from the repository root so one Dockerfile can see both `backend/` and `frontend/`. The root `Dockerfile` is the one the workflow uses.
