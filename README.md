@@ -32,3 +32,7 @@ Create `backend/.env` with:
 | `GEMINI_API_KEY` | Your Gemini API key |
 | `GEMINI_MODEL` | Model name. Defaults to `gemini-3.8-flash` |
 
+Technology
+
+. Express
+. TypeScript
