@@ -1,15 +1,13 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 env:
-  PROJECT_ID: concepts-459009
-  REGION: us-central1
+  PROJECT_ID: YOUR_PROJECT_ID
+  REGION: YOUR_REGION
   SERVICE: explainit1
-  IMAGE: us-central1-docker.pkg.dev/concepts-459009/explainit1/explainit1
+  IMAGE: YOUR_REGION-docker.pkg.dev/YOUR_PROJECT_ID/explainit1/explainit1
 
 jobs:
   deploy:
@@ -25,14 +23,14 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: projects/892803193821/locations/global/workloadIdentityPools/github-pool/providers/github-provider-cloud-run-demo
-          service_account: argo-deployer@concepts-459009.iam.gserviceaccount.com
+          workload_identity_provider: projects/YOUR_PROJECT_NUMBER/locations/global/workloadIdentityPools/YOUR_GITHUB_POOL/providers/YOUR_GITHUB_PROVIDER
+          service_account: YOUR_DEPLOYER_SERVICE_ACCOUNT@YOUR_PROJECT_ID.iam.gserviceaccount.com
 
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Log in to Artifact Registry
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+        run: gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
 
       - name: Build and push the image
         run: |
